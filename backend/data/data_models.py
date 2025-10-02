@@ -1,5 +1,6 @@
 # Data models used in the onboarding
 # NOTE: This file should not be modified
+
 from datetime import datetime
 from pydantic import model_validator
 from sqlmodel import Field
@@ -33,7 +34,21 @@ class MainCommand(BaseSQLModel, table=True):
         The format of the comma seperated values is "data1,data2" so no spaces between data and the commas.
         """
         # TODO: (Member) Implement this method
-        return self
+
+        if self.params == None and self.format == None:
+            return self
+        elif (self.params == None) != (self.format == None):
+            raise ValueError("Both params and format bust be None or must both be given")
+        
+        params_count = len(self.params.split(","))
+        format_count = len(self.format.split(","))
+
+        if params_count == format_count:
+            return self
+        else:
+            raise ValueError("params and format must be the same length")
+
+        
 
 
 class Command(BaseSQLModel, table=True):

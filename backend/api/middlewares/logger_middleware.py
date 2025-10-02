@@ -18,5 +18,16 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         :return: Response from endpoint
         """
         # TODO:(Member) Finish implementing this method
+
+        print(f"Incoming request: {request.method} {request.url}")
+        if request.query_params:
+            print(f"Query params: {dict(request.query_params)}")
+
+        
         response = await call_next(request)
+
+        print(f"Response status: {response.status_code}")
+
+
+
         return response
