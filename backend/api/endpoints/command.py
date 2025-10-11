@@ -62,5 +62,5 @@ def delete_command(id: int, db: Session = Depends(get_db)):
         return CommandListResponse(data=all_commands)
 
     else:
-        raise HTTPException(404)
+        raise HTTPException(status_code=404, detail="Error, id does not exist")
 
